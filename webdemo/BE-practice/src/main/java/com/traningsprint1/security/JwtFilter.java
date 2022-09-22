@@ -16,6 +16,11 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+
+/**
+ * @Version: 20-sept-2022
+ * @Author: TuanPA3
+ * */
 @Component
 public class JwtFilter extends OncePerRequestFilter {
     private String jwtToken;
@@ -28,6 +33,10 @@ public class JwtFilter extends OncePerRequestFilter {
     @Autowired
     private IAccountService iAccountService;
 
+    /** this doFilterInternal is the class used to fill any request from client to server to check whether that request have authorization or not
+     * @Version: 20-sept-2022
+     * @Author: TuanPA3
+     * */
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         try {
@@ -48,6 +57,10 @@ public class JwtFilter extends OncePerRequestFilter {
         filterChain.doFilter(request, response);
     }
 
+    /** this getTokenFromRequest is the class used to get token from client 's request
+     * @Version: 20-sept-2022
+     * @Author: TuanPA3
+     * */
     private String getTokenFromRequest(HttpServletRequest request) {
         String token = request.getHeader("Authorization");
         if (StringUtils.hasText(token) && token.startsWith("Bearer ")) {

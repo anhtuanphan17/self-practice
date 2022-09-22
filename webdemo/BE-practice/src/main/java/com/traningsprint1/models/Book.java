@@ -10,6 +10,10 @@ import org.hibernate.validator.constraints.Length;
 import javax.persistence.*;
 import java.util.Set;
 
+/**
+ * @Version: 20-sept-2022
+ * @Author: TuanPA3
+ * */
 @Entity
 @Table(name = "book")
 @Getter
