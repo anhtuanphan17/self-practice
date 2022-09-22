@@ -1,7 +1,20 @@
 package com.traningsprint1.payload.response;
 
-import java.util.List;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+import java.util.List;
+/**
+ * this JwtResponse class is the object considered as an object server response to client
+ * @Version: 20-sept-2022
+ * @Author: TuanPA3
+ * */
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class JwtResponse {
     private String token;
     private String type = "Bearer";
@@ -9,9 +22,6 @@ public class JwtResponse {
     private String username;
     private String imageLink;
     private List<String> roles;
-
-    public JwtResponse() {
-    }
 
     public JwtResponse(String token, Long id, String username, String imageLink, List<String> roles) {
         this.token = token;
@@ -21,51 +31,4 @@ public class JwtResponse {
         this.roles = roles;
     }
 
-    public String getToken() {
-        return token;
-    }
-
-    public void setToken(String token) {
-        this.token = token;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getImageLink() {
-        return imageLink;
-    }
-
-    public void setImageLink(String imageLink) {
-        this.imageLink = imageLink;
-    }
-
-    public List<String> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(List<String> roles) {
-        this.roles = roles;
-    }
 }
