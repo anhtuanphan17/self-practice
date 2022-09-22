@@ -13,6 +13,11 @@ import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * IBookRepository
+ * @Version: 20-sept-2022
+ * @Author: TuanPA3
+ * */
 @Repository
 public interface IBookRepository extends JpaRepository<Book, Long> {
 
@@ -21,8 +26,6 @@ public interface IBookRepository extends JpaRepository<Book, Long> {
     @Query(value = "INSERT INTO book (`name`,`price`,`image`,`description`,`delete_flag`,`category_id`) " +
             "VALUES (:#{#book.name}, :#{#book.price}, :#{#book.image}, :#{#book.description}, :#{#book.deleteFlag}, :#{#book.category.id});", nativeQuery = true)
     void createBook(Book book);
-
-
 
     @Query(value = "SELECT * FROM book WHERE delete_flag = 0 and id = :id", nativeQuery = true)
     Optional<Book> findBookById(@Param("id") Long id);
@@ -44,7 +47,10 @@ public interface IBookRepository extends JpaRepository<Book, Long> {
                     " WHERE delete_flag = 0 and `name` like concat ('%',:name,'%')", nativeQuery = true)
     Page<Book> findAllBook(Pageable pageable, @Param("name") String keyNameValue);
 
-
+    /** this findAllBookByNameAndCategory function is to find page of book by name and category
+     * @Version: 20-sept-2022
+     * @Author: TuanPA3
+     * */
     @Query(value = "SELECT book.id,`description`,image,`name`, price,book.category_id, book.delete_flag FROM book\n" +
             "join category on book.category_id = category.id\n" +
             "where category_name like concat('%',:category,'%') and `name` like concat('%',:name,'%') and delete_flag = 0 order by id asc",
@@ -53,6 +59,8 @@ public interface IBookRepository extends JpaRepository<Book, Long> {
                     "where category_name like concat('%',:category,'%') and `name` like concat('%',:name,'%') and delete_flag = 0 order by id asc"
             , nativeQuery = true)
     Page<Book> findAllByNameAndCategory(Pageable pageable, @Param("name") String keyNameValue, @Param("category") String keyCategoryValue);
+
+    Book findBookByName(String inputName);
 }
 
 

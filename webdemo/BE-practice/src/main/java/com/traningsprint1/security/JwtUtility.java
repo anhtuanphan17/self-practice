@@ -8,12 +8,19 @@ import org.springframework.stereotype.Component;
 import java.io.Serializable;
 import java.util.Date;
 
+/**
+ * @Version: 20-sept-2022
+ * @Author: TuanPA3
+ * */
 @Component
 public class JwtUtility implements Serializable {
     private static final Logger logger = LoggerFactory.getLogger(JwtUtility.class);
     private static final String jwtSecret = "TuanPA-TRAINING";
 
-
+    /** This generateJwtToken is to generate a token with the given param username
+     * @Version: 20-sept-2022
+     * @Author: TuanPA3
+     * */
     public String generateJwtToken(String username) {
         return Jwts.builder()
                 .setSubject(username)
@@ -23,11 +30,18 @@ public class JwtUtility implements Serializable {
                 .compact();
     }
 
+    /** This getUserNameFromJwtToken is to get username from token
+     * @Version: 20-sept-2022
+     * @Author: TuanPA3
+     * */
     public String getUserNameFromJwtToken(String token) {
         return Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token).getBody().getSubject();
     }
 
-
+    /** This validateJwtToken is to validate token
+     * @Version: 20-sept-2022
+     * @Author: TuanPA3
+     * */
     public boolean validateJwtToken(String authToken) {
         try {
             Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(authToken).getBody().getSubject();

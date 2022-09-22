@@ -11,6 +11,11 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+/** Class: AccountDetailsImpl implement interface UserDetails to override all method of interface UserDetails
+ *  to store Account information which is encapsulated later into Authentication object
+ * @Version: 20-sept-2022
+ * @Author: TuanPA3
+ * */
 public class AccountDetailsImpl implements UserDetails {
     private static final long serialVersionUID = 1L;
     private Long id;
@@ -31,6 +36,12 @@ public class AccountDetailsImpl implements UserDetails {
         this.authorities = authorities;
     }
 
+    /** Function: method build(Account) is used to convert the Account object
+     * to an AccountDetailsImpl object which implements the UserDetails interface.
+     * @Param: account
+     * @Version: 20-sept-2022
+     * @Author: TuanPA3
+     * */
     public static AccountDetailsImpl build(Account account) {
         List<GrantedAuthority> authorities = account.getAccountRoleSet().stream()
                 .map(role -> new SimpleGrantedAuthority(role.getRole().getRoleName()))
