@@ -8,7 +8,10 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Set;
-
+/**
+ * @Version: 20-sept-2022
+ * @Author: TuanPA3
+ * */
 @Entity
 @Table(name = "invoice")
 @Getter
@@ -27,7 +30,6 @@ public class Invoice {
     @ManyToOne
     @JoinColumn(name = "customer_id", referencedColumnName = "id")
     private Customer customer;
-
 
     @OneToMany(mappedBy = "invoice")
     @JsonBackReference

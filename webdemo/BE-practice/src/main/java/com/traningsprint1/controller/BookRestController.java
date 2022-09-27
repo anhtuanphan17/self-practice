@@ -6,7 +6,6 @@ import com.traningsprint1.models.Category;
 import com.traningsprint1.models.ResponseObject;
 import com.traningsprint1.service.IBookService;
 import com.traningsprint1.service.ICategoryService;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -15,27 +14,38 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+
 import javax.validation.Valid;
 import java.util.*;
+
+/** BookRestController is the class use for receiving request and sending respond data relating watch list book, create, edit, delete book
+ * @Version: 20-sept-2022
+ * @Author: TuanPA3
+ * */
 
 @RestController
 @CrossOrigin("*")
 @RequestMapping("/api/book")
 public class BookRestController {
-
     @Autowired
     IBookService iBookService;
 
     @Autowired
     ICategoryService iCategoryService;
 
-
+    /**
+     * This showListBook function is to show list of books and searched books
+     * @param  keyName
+     * @param  keyCategory
+     * @Version: 20-sept-2022
+     * @Author: TuanPA3
+     */
     @GetMapping(value = "/list")
-    public ResponseEntity<Page<Book>> listBook(@PageableDefault(value = 12)Pageable pageable, @RequestParam Optional<String> keyName, @RequestParam Optional<String> keyCategory){
-
+    public ResponseEntity<Page<Book>> showListBook(@PageableDefault(value = 12)Pageable pageable,
+                                                   @RequestParam Optional<String> keyName,
+                                                   @RequestParam Optional<String> keyCategory){
             String keyNameValue = keyName.orElse("");
             String keyCategoryValue = keyCategory.orElse("");
-
             Page<Book> bookPage = this.iBookService.findAllBookByNameAndCategory(pageable,keyNameValue,keyCategoryValue);
             if(bookPage.isEmpty()){
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -43,38 +53,48 @@ public class BookRestController {
             return new ResponseEntity<>(bookPage,HttpStatus.OK);
     }
 
+    /**
+     * This getListCategory function is to show list of all categories
+     * @Version: 20-sept-2022
+     * @Author: TuanPA3
+     */
     @GetMapping(value = "/category")
     public ResponseEntity<List<Category>> getListCategory(){
         List<Category> categoryList = this.iCategoryService.getAllCategory();
         return new ResponseEntity<>(categoryList,HttpStatus.OK);
     }
 
+    /**
+     * This createBook function is to show list of books and searched books
+     * @param  bookDto
+     * @Version: 20-sept-2022
+     * @Author: TuanPA3
+     */
     @PostMapping(value = "/create")
     public ResponseEntity<ResponseObject> createBook(@Valid @RequestBody BookDto bookDto, BindingResult bindingResult) {
-        Map<String, String> errorMap = new HashMap<>();
+            Map<String, String> errorMap = new HashMap<>();
+            BookDto bookDtoErrors = new BookDto();
+            bookDtoErrors.setIBookService(iBookService);
+            bookDtoErrors.validate(bookDto, bindingResult);
+            if (bindingResult.hasFieldErrors()) {
+                bindingResult
+                        .getFieldErrors()
+                        .stream()
+                        .forEach(f -> errorMap.put(f.getField(), f.getDefaultMessage()));
 
-        if (bindingResult.hasFieldErrors()) {
-            bindingResult
-                    .getFieldErrors()
-                    .stream()
-                    .forEach(f -> errorMap.put(f.getField(), f.getDefaultMessage()));
+                return new ResponseEntity<>(new ResponseObject<>(false, "failed!", errorMap, new ArrayList<>()), HttpStatus.BAD_REQUEST);
+            }
 
-            return new ResponseEntity<>(new ResponseObject<>(false, "failed!", errorMap, new ArrayList<>()), HttpStatus.BAD_REQUEST);
-        }
-        Double price = Double.valueOf(bookDto.getPrice());
-        Book book = new Book();
-        BeanUtils.copyProperties(bookDto,book);
-        Category category =  new Category();
-        BeanUtils.copyProperties(bookDto.getCategoryDto(),category);
-        book.setCategory(category);
-        book.setPrice(price);
-        book.setDeleteFlag(false);
-
-        this.iBookService.save(book);
-
+            this.iBookService.saveBookDto(bookDto);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    /**
+     * This findBookById function is to find book by id
+     * @Param  id
+     * @Version: 20-sept-2022
+     * @Author: TuanPA3
+     */
     @GetMapping(value = "/{id}")
     public ResponseEntity<Book> findBookById(@PathVariable Long id){
         Optional<Book> book = this.iBookService.findBookById(id);
@@ -84,10 +104,16 @@ public class BookRestController {
         return new ResponseEntity<>(null,HttpStatus.BAD_REQUEST);
     }
 
+    /**
+     * This updateBook function is to update edited book
+     * @Param  id
+     * @Version: 20-sept-2022
+     * @Author: TuanPA3
+     */
     @PatchMapping(value = "/update/{id}")
     public ResponseEntity<ResponseObject> updateBook(@PathVariable Long id, @Valid @RequestBody BookDto bookDto, BindingResult bindingResult){
-
         Map<String,String> errorMap = new HashMap<>();
+//       check if book is not found in database with given param id
         if(!this.iBookService.findBookById(id).isPresent()){
             return new ResponseEntity<>(new ResponseObject(false, "id is not exist", errorMap, new ArrayList<>()),  HttpStatus.BAD_REQUEST);
         }
@@ -96,20 +122,18 @@ public class BookRestController {
                     .getFieldErrors()
                     .stream()
                     .forEach(f -> errorMap.put(f.getField(),f.getDefaultMessage()));
-
             return new ResponseEntity<>(new ResponseObject(false,"failed!",errorMap,new ArrayList()),HttpStatus.BAD_REQUEST);
         }
-        Double price = Double.valueOf(bookDto.getPrice());
-        Book book = new Book();
-        BeanUtils.copyProperties(bookDto,book);
-        Category category =  new Category();
-        BeanUtils.copyProperties(bookDto.getCategoryDto(),category);
-        book.setCategory(category);
-        book.setPrice(price);
-        this.iBookService.updateBook(book);
+        this.iBookService.updateBookDto(bookDto);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    /**
+     * This deleteBookById function is to delete book by id
+     * @Param  id
+     * @Version: 20-sept-2022
+     * @Author: TuanPA3
+     */
     @PatchMapping(value = "/delete/{id}")
     public ResponseEntity<?> deleteBookById(@PathVariable Long id){
         Optional<Book> book = this.iBookService.findBookById(id);

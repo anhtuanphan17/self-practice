@@ -6,7 +6,10 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-
+/**
+ * @Version: 20-sept-2022
+ * @Author: TuanPA3
+ * */
 @Entity
 @Table(name = "account_role")
 @Getter

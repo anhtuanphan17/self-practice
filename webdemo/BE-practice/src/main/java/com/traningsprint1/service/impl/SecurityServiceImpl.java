@@ -15,6 +15,10 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * @Version: 20-sept-2022
+ * @Author: TuanPA3
+ * */
 @Service
 public class SecurityServiceImpl implements ISecurityService {
 
@@ -24,6 +28,12 @@ public class SecurityServiceImpl implements ISecurityService {
     @Autowired
     private JwtUtility jwtUtility;
 
+    /**
+     * This authenticateUser function is to authenticate login request from client
+     * @param  loginRequest
+     * @Version: 20-sept-2022
+     * @Author: TuanPA3
+     */
     public JwtResponse loginByAccount(LoginRequest loginRequest) {
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword())
@@ -36,7 +46,7 @@ public class SecurityServiceImpl implements ISecurityService {
         List<String> roles = accountDetails.getAuthorities().stream()
                 .map(GrantedAuthority::getAuthority)
                 .collect(Collectors.toList());
-
         return new JwtResponse(jwt, accountDetails.getId(), accountDetails.getUsername(), accountDetails.getImageLink(), roles);
     }
+
 }

@@ -13,7 +13,12 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-
+/** Class: This WebSecurityConfig class extends WebSecurityConfigurerAdapter class is the security
+ deployment stopper. It provides HttpSecurity profiles to configure cors, csrf, session management,
+ rules for resources to be protected.
+ * @Version: 20-sept-2022
+ * @Author: TuanPA3
+ * */
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
@@ -39,7 +44,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 
-
+    /**Function: This configure() method allows requests to see which requests are accessed by which role respectively.
+     * @Version: 20-sept-2022
+     * @Author: TuanPA3
+     * */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.cors().and().csrf().disable()

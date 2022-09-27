@@ -8,7 +8,10 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Set;
-
+/**
+ * @Version: 20-sept-2022
+ * @Author: TuanPA3
+ * */
 @Entity
 @Table(name = "account")
 @Getter
@@ -27,6 +30,8 @@ public class Account {
     private String email;
     @Column(name = "is_enabled")
     private Boolean isEnabled;
+    @Column(name = "verification_code", length = 255)
+    private String verificationCode;
 
     @OneToOne(mappedBy = "account")
     @JsonBackReference
