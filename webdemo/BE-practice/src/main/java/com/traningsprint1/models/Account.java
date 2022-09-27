@@ -30,6 +30,8 @@ public class Account {
     private String email;
     @Column(name = "is_enabled")
     private Boolean isEnabled;
+    @Column(name = "verification_code", length = 255)
+    private String verificationCode;
 
     @OneToOne(mappedBy = "account")
     @JsonBackReference

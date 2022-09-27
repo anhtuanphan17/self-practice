@@ -16,4 +16,8 @@ public interface IAccountService {
     boolean ifEmailExist(String email);
 
     Account getAccountByEmail(String email);
+
+    String setVerificationCode(Account account);
+
+    void changePassword(String newPassword, Long id);
 }

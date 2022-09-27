@@ -8,4 +8,5 @@ import com.traningsprint1.payload.response.JwtResponse;
  * */
 public interface ISecurityService {
     JwtResponse loginByAccount(LoginRequest loginRequest);
+
 }

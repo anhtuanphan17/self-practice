@@ -46,7 +46,7 @@ public class SecurityServiceImpl implements ISecurityService {
         List<String> roles = accountDetails.getAuthorities().stream()
                 .map(GrantedAuthority::getAuthority)
                 .collect(Collectors.toList());
-
         return new JwtResponse(jwt, accountDetails.getId(), accountDetails.getUsername(), accountDetails.getImageLink(), roles);
     }
+
 }
