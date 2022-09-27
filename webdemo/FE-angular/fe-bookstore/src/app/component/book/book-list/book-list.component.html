@@ -1,0 +1,149 @@
+<div class="mb-5">
+  <h1 class="my-5">Book Management</h1>
+  <form [formGroup]="searchForm" (ngSubmit)="search()">
+    <div class="mb-3 row">
+      <div class="row col-12 ml-1">
+        <div style="height: 25px">
+          <strong> Tìm kiếm theo: </strong>
+        </div>
+
+        <div class="mx-1" style="height: 25px">
+          <select name="" id="" class="search-select" formControlName="typeSearch">
+            <option value="" disabled selected>Chọn thể loại tìm kiếm</option>
+            <option value="name">Tên Sách</option>
+            <option value="category">Danh Mục</option>
+          </select>
+          <div>
+          <small class="text-danger" *ngIf="notChoose">Vui lòng chọn thể loại tìm kiếm</small>
+          </div>
+        </div>
+
+        <div style="height: 25px">
+          <input (keyup.enter)="search()" style="width: 250px"
+                 class="header-search search-input" placeholder="Nhập giá trị cần tìm kiếm"
+                 type="text" formControlName="inputSearch"><i (click)="clearAll()"
+                                                              class="fa-solid fa-repeat"
+                                                              style="position: relative; right: 26px; top: 3px; font-size: 18px"></i>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+
+<!--Pagination-->
+<nav class="d-flex justify-content-end wow fadeIn">
+  <ul class="pagination">
+    <li class="page-item">
+      <button
+        [ngStyle]="{'background-color': first === true ? 'gray' : 'white','color': first === true ? 'white' : 'blue'}"
+        [disabled]="first" class="page-link" (click)="goFirstPage()">Trang Đầu
+      </button>
+    </li>
+    <li class="page-item">
+      <button
+        [ngStyle]="{'background-color': first === true ? 'gray' : 'white','color': first === true ? 'white' : 'blue'}"
+        [disabled]="first" class="page-link" (click)="previous()">Trang Trước
+      </button>
+    </li>
+
+    <li class="page-item active" aria-current="page">
+      <button [disabled]="true" class="page-link">{{page + 1}}</button>
+    </li>
+
+    <li class="page-item">
+      <button
+        [ngStyle]="{'background-color': last === true ? 'gray' : 'white','color': last === true ? 'white' : 'blue'}"
+        [disabled]="last" class="page-link" (click)="next()">Trang Sau
+      </button>
+    </li>
+
+    <li class="page-item">
+      <button
+        [ngStyle]="{'background-color': last === true ? 'gray' : 'white','color': last === true ? 'white' : 'blue'}"
+        [disabled]="last" class="page-link" (click)="goLastPage()">Trang Cuối
+      </button>
+    </li>
+  </ul>
+</nav>
+<div *ngIf="message">
+  <div class="tbl-content">
+    <table cellpadding="0" cellspacing="0" border="0.5">
+      <tbody>
+      <tr>
+        <td class="d-flex justify-content-center font-weight-bold text-uppercase"> Không tìm thấy dữ liệu</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="col-2">
+  <div class="float-right">
+    <button class="btn btn-grad-blue" routerLink="/book/create"><i class="fa fa-plus" aria-hidden="true"></i>
+      Thêm mới
+    </button>
+  </div>
+</div>
+
+<div *ngIf="!message" style="height: 1100px;">
+  <div>
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Description</th>
+        <th>Category</th>
+        <th>Edit</th>
+        <th>Delete</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let book of bookList,let j=index" routerLinkActive="active" (click)="activeProject(j,book)"
+          [ngStyle]="{'background-color': activeProjectIndex === j && flag ? '#9ddceb' : 'white' }">
+
+        <td>{{(book.id)}}</td>
+        <td>{{book.name}}</td>
+        <td>{{book.price}}</td>
+        <td>{{book.description}}</td>
+        <td>{{book.category.name}}</td>
+        <td style="margin-top: 12px " routerLink="/book/edit/{{book.id}}" class="btn btn-grad-blue mx-1" >Edit</td>
+        <td><a (click)="deleteBook(book,sucessButton)" class="btn btn-grad-red mx-1">Delete</a></td>
+      </tr>
+      </tbody>
+    </table>
+    <div>
+      <p class="page-link">{{(page + 1) + '/' + totalPage}}</p>
+    </div>
+    <div class="col-4">
+
+    </div>
+  </div>
+</div>
+
+
+
+
+<button [hidden]="true" #sucessButton data-toggle="modal" data-target="#successModal"></button>
+<!--success modal-->
+<div id="successModal" class="modal fade">
+  <div class="modal-dialog modal-confirm modal-confirm-success">
+    <div class="modal-content">
+      <div class="modal-header modal-header-success justify-content-center">
+        <div class="icon-box">
+          <i class="material-icons">&#xE876;</i>
+        </div>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+      </div>
+      <div class="modal-body text-center">
+        <h4>Thông báo</h4>
+        <br>
+        <p>Sản phẩm đã được xóa</p>
+        <div class="d-flex justify-content-center">
+          <button type="button" class="btn-modal btn-grad-blue" data-dismiss="modal">Đồng ý</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

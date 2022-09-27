@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="cca10f2f-7cf8-4d6e-9a87-55de35f18068" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../../../README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../BE-practice/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../BE-practice/build.gradle" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../BE-practice/gradle/wrapper/gradle-wrapper.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../BE-practice/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../BE-practice/gradlew" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../BE-practice/gradlew.bat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../BE-practice/settings.gradle" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../BE-practice/src/main/java/com/traningsprint1/TraningSprint1Application.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../BE-practice/src/main/java/com/traningsprint1/controller/BookRestController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../BE-practice/src/main/java/com/traningsprint1/controller/SecurityRestController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../BE-practice/src/main/java/com/traningsprint1/controller/SocialRestController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../BE-practice/src/main/java/com/traningsprint1/dto/BookDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../BE-practice/src/main/java/com/traningsprint1/dto/CategoryDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../BE-practice/src/main/java/com/traningsprint1/models/Account.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../BE-practice/src/main/java/com/traningsprint1/models/AccountRole.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../BE-practice/src/main/java/com/traningsprint1/models/Book.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../BE-practice/src/main/java/com/traningsprint1/models/Category.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../BE-practice/src/main/java/com/traningsprint1/models/Customer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../BE-practice/src/main/java/com/traningsprint1/models/Invoice.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../BE-practice/src/main/java/com/traningsprint1/models/InvoiceDetail.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../BE-practice/src/main/java/com/traningsprint1/models/ResponseObject.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../BE-practice/src/main/java/com/traningsprint1/models/Role.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../BE-practice/src/main/java/com/traningsprint1/payload/request/CheckVerificationCodeRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../BE-practice/src/main/java/com/traningsprint1/payload/request/LoginRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../BE-practice/src/main/java/com/traningsprint1/payload/request/ResetPasswordRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../BE-practice/src/main/java/com/traningsprint1/payload/request/TokenDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../BE-practice/src/main/java/com/traningsprint1/payload/response/JwtResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../BE-practice/src/main/java/com/traningsprint1/repository/IAccountRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../BE-practice/src/main/java/com/traningsprint1/repository/IAccountRoleRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../BE-practice/src/main/java/com/traningsprint1/repository/IBookRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../BE-practice/src/main/java/com/traningsprint1/repository/ICategoryRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../BE-practice/src/main/java/com/traningsprint1/security/JwtFilter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../BE-practice/src/main/java/com/traningsprint1/security/JwtUtility.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../BE-practice/src/main/java/com/traningsprint1/security/WebSecurityConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../BE-practice/src/main/java/com/traningsprint1/service/IAccountRoleService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../BE-practice/src/main/java/com/traningsprint1/service/IAccountService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../BE-practice/src/main/java/com/traningsprint1/service/IBookService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../BE-practice/src/main/java/com/traningsprint1/service/ICategoryService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../BE-practice/src/main/java/com/traningsprint1/service/ISecurityService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../BE-practice/src/main/java/com/traningsprint1/service/ISocialService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../BE-practice/src/main/java/com/traningsprint1/service/impl/AccountDetailsImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../BE-practice/src/main/java/com/traningsprint1/service/impl/AccountDetailsServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../BE-practice/src/main/java/com/traningsprint1/service/impl/AccountServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../BE-practice/src/main/java/com/traningsprint1/service/impl/BookServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../BE-practice/src/main/java/com/traningsprint1/service/impl/CategoryServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../BE-practice/src/main/java/com/traningsprint1/service/impl/EmailSendService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../BE-practice/src/main/java/com/traningsprint1/service/impl/SecurityServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../BE-practice/src/main/java/com/traningsprint1/service/impl/SocialServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../BE-practice/src/main/resources/application.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../BE-practice/src/test/java/com/traningsprint1/TraningSprint1ApplicationTests.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="TypeScript File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../.." />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2E4QxvUBiEVSgKeXb9BN5bDeni2" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "C:/Users/TuanPA/Desktop/training/self-practice/webdemo/FE-angular/fe-bookstore",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.lookFeel",
+    "ts.external.directory.path": "C:\\Program Files\\JetBrains\\WebStorm 2022.2.1\\plugins\\JavaScriptLanguage\\jsLanguageServicesImpl\\external",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\TuanPA\Desktop\FE-angular\fe-bookstore\src\app\service\security" />
+      <recent name="C:\Users\TuanPA\Desktop\FE-angular\fe-bookstore\src\app" />
+    </key>
+  </component>
+  <component name="RunManager" selected="npm.Angular CLI Server">
+    <configuration name="Tests (fe-bookstore)" type="JavaScriptTestRunnerKarma">
+      <config-file value="$PROJECT_DIR$/karma.conf.js" />
+      <working-directory value="$PROJECT_DIR$" />
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <configuration name="Angular Application" type="JavascriptDebugType" uri="http://localhost:4200">
+      <method v="2" />
+    </configuration>
+    <configuration name="Angular CLI Server" type="js.build_tools.npm">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="start" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="cca10f2f-7cf8-4d6e-9a87-55de35f18068" name="Changes" comment="" />
+      <created>1661852627510</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1661852627510</updated>
+      <workItem from="1661852630574" duration="1039000" />
+      <workItem from="1661909590846" duration="408000" />
+      <workItem from="1661910323364" duration="22683000" />
+      <workItem from="1662341720215" duration="12180000" />
+      <workItem from="1662428343778" duration="5101000" />
+      <workItem from="1662433499956" duration="18607000" />
+      <workItem from="1662514671059" duration="4989000" />
+      <workItem from="1662522989483" duration="3622000" />
+      <workItem from="1662609374905" duration="607000" />
+      <workItem from="1662707101834" duration="890000" />
+      <workItem from="1662951032801" duration="1266000" />
+      <workItem from="1663034144008" duration="8903000" />
+      <workItem from="1663119087410" duration="42530000" />
+      <workItem from="1663303854762" duration="784000" />
+      <workItem from="1663574108760" duration="1227000" />
+      <workItem from="1663640754701" duration="1303000" />
+      <workItem from="1663659460571" duration="1384000" />
+      <workItem from="1663745552654" duration="2102000" />
+      <workItem from="1663821922300" duration="4141000" />
+      <workItem from="1663898938200" duration="29974000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>

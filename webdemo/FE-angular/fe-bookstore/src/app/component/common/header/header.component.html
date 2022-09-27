@@ -1,0 +1,106 @@
+<!--Header-->
+<header>
+  <div class="container">
+    <div class="menu-bar-content">
+      <ul>
+
+<!--        <li><input class="header-search" readonly placeholder="Bạn cần tìm gì?" type="text"><i-->
+<!--          class="fa fa-search"></i></li>-->
+        <li [hidden]="!isLoggedIn">
+          <div class="header-item header-item-menu">
+            <div class="header-icon">
+              <i class="fa-solid fa-align-left"> </i>
+            </div>
+            <div class="header-text">
+              <strong>Menu </strong> <i class="fa-solid fa-angle-down"></i>
+            </div>
+          </div>
+
+          <div class="sub-menu">
+            <ul>
+              <li *ngIf="['ROLE_ADMIN'].indexOf(role)!==-1"><a routerLink="/list">Quản lý Sách</a></li>
+              <li *ngIf="['ROLE_ADMIN', 'ROLE_USER'].indexOf(role)!==-1"  routerLink="" ><a >Xem cửa hàng</a>
+<!--                <div class="sub-menu-2">-->
+<!--                  <ul>-->
+<!--                    <li *ngIf="['ROLE_ADMIN', 'ROLE_SELLER'].indexOf(role)!==-1"><a [routerLink]="['/listInvoice']">Quản lý lịch sử</a></li>-->
+<!--                    <li *ngIf="['ROLE_ADMIN', 'ROLE_STAFF'].indexOf(role)!==-1"><a [routerLink]="['/customer/list']">Quản lý khách hàng</a></li>-->
+<!--                  </ul>-->
+<!--                </div>-->
+<!--              </li>-->
+<!--              <li *ngIf="['ROLE_ADMIN', 'ROLE_STAFF'].indexOf(role)!==-1"><a>Quản lý báo cáo<i class="fa-solid fa-angle-right"></i></a>-->
+<!--                <div class="sub-menu-2">-->
+<!--                  <ul>-->
+<!--                    <li><a [routerLink]="['/sale-report/list']">Quản lý báo cáo bán hàng</a></li>-->
+<!--                    <li><a [routerLink]="['/report/customer-report']">Quản lý báo cáo khách hàng</a></li>-->
+<!--                  </ul>-->
+<!--                </div>-->
+<!--              </li>-->
+<!--              <li *ngIf="['ROLE_ADMIN', 'ROLE_SELLER', 'ROLE_STAFF'].indexOf(role)!==-1"><a routerLink="/listProduct">Xem thông tin hàng hóa</a></li>-->
+<!--              <li *ngIf="['ROLE_ADMIN', 'ROLE_STOREKEEPER'].indexOf(role)!==-1"><a [routerLink]="['/supplier']">Quản lý nhà cung cấp</a></li>-->
+<!--              <li *ngIf="['ROLE_ADMIN', 'ROLE_SELLER'].indexOf(role)!==-1"><a [routerLink]="['/invoice']" >Quản lý bán hàng</a></li>-->
+<!--              <li *ngIf="['ROLE_ADMIN', 'ROLE_STOREKEEPER'].indexOf(role)!==-1"><a href="#">Quản lý xuất nhập kho<i class="fa-solid fa-angle-right"></i></a>-->
+<!--                <div class="sub-menu-2">-->
+<!--                  <ul>-->
+<!--                    <li><a routerLink="/storage/create">Nhập kho sản phẩm</a></li>-->
+<!--                  </ul>-->
+<!--                </div>-->
+<!--              </li>-->
+            </ul>
+          </div>
+
+        <li>
+          <div class="header-item">
+            <div class="header-icon">
+              <i class="fa-solid fa-phone"></i>
+            </div>
+            <div class="header-text">
+              <span>Gọi mua hàng</span><br>
+              <span><strong>1800.1008</strong></span>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="header-item">
+            <div class="header-icon">
+              <i class="fa-solid fa-location-dot"></i>
+            </div>
+            <div class="header-text">
+              <span>Cửa hàng</span><br>
+              <span>gần bạn</span>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="header-item">
+            <div class="header-icon">
+              <i class="fa-solid fa-truck"></i>
+            </div>
+            <div class="header-text">
+              <span>Tra cứu</span><br>
+              <span>đơn hàng</span>
+            </div>
+          </div>
+        </li>
+        <li [hidden]="isLoggedIn" class="header-item-login"><a [routerLink]="['/login']">Đăng nhập</a></li>
+        <li [hidden]="!isLoggedIn">
+          <div class="header-item header-item-menu">
+            <div class="header-icon">
+              <img src="{{imageLink}}"
+                   alt="" style="border-radius: 50%;width: 40px; height: 40px; object-fit: cover">
+            </div>
+            <div class="header-text">
+              {{username}} <i class="fa-solid fa-angle-down"></i>
+            </div>
+          </div>
+          <div class="sub-menu">
+            <ul>
+              <li><a [routerLink]="['/personal-information']">Thông tin cá nhân</a></li>
+              <li><a [routerLink]="['/change-personal-password']">Bảo mật</a></li>
+              <li><a (click)="logOut()">Đăng xuất</a></li>
+            </ul>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</header>

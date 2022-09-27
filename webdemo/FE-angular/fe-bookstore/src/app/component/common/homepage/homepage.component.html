@@ -1,0 +1,169 @@
+<div
+  class="p-5 text-center bg-image"
+  style="
+      background-image: url('https://freetuts.net/upload/tut_post/images/2021/06/29/4045/anh-wallpaperup-full-hp-4k-chat-luong-cao.jpg');
+      height: 150px;
+      margin-top: 0;
+    "
+>
+  <div class="mask" style="background-color: rgba(0, 0, 0, 0.6);">
+    <div class="d-flex justify-content-center align-items-center h-100">
+      <div class="text-white">
+        <h1 class="mb-3">Book List</h1>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="mb-5">
+  <h1 class="my-5">Tìm Kiếm</h1>
+  <form [formGroup]="searchForm" (ngSubmit)="search()">
+    <div class="mb-3 row">
+      <div class="row col-12 ml-1">
+        <div style="height: 25px">
+          <strong> Tìm kiếm theo: </strong>
+        </div>
+
+        <div class="mx-1" style="height: 25px">
+          <select name="" id="" class="search-select" formControlName="typeSearch">
+            <option value="" disabled selected>Chọn thể loại tìm kiếm</option>
+            <option value="name">Tên Sách</option>
+            <option value="category">Danh Mục</option>
+          </select>
+          <div>
+            <small class="text-danger" *ngIf="notChoose">Vui lòng chọn thể loại tìm kiếm</small>
+          </div>
+        </div>
+
+        <div style="height: 25px">
+          <input (keyup.enter)="search()" style="width: 250px"
+                 class="header-search search-input" placeholder="Nhập giá trị cần tìm kiếm"
+                 type="text" formControlName="inputSearch"><i (click)="clearAll()"
+                                                              class="fa-solid fa-repeat"
+                                                              style="position: relative; right: 26px; top: 3px; font-size: 18px"></i>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+
+
+<div *ngIf="message" style="height: 1350px">
+  <div class="tbl-content">
+    <table cellpadding="0" cellspacing="0" border="0.5">
+      <tbody>
+      <tr>
+        <td class="d-flex justify-content-center font-weight-bold text-uppercase"> Không tìm thấy dữ liệu</td>
+        <img src="">
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+<div *ngIf="!message" style="height: 1350px;">
+<div >
+  <section class="text-center container-fluid" style="margin-top: 30px">
+    <div class="row wow fadeIn">
+      <div class="col-2 mt-5" *ngFor="let book of bookList">
+        <div class="card">
+
+          <div class="view overlay">
+            <img
+              src="{{book.image}}"
+              class="card-img-top" alt="">
+            <a>
+              <div class="mask rgba-white-slight"></div>
+            </a>
+          </div>
+          <div class="card-body text-center">
+            <a href="" class="grey-text">
+              <h5>{{book.name}}</h5>
+            </a>
+
+            <h4 class="blue-text">
+              <strong>{{book.price}}$</strong>
+            </h4>
+            <br>
+            <div style="display: flex; justify-content: center">
+<!--              <a [routerLink]="['/service/edit/',book.id]">-->
+<!--                <button style="width: 100px" class="btn btn-primary btn-rounded btn-sm my-0">Edit</button>-->
+<!--              </a>-->
+              <button style="width: 100px" class="btn btn-primary btn-rounded btn-sm my-0">Add to card</button>
+<!--              <a (click)="onOpenDeleteModal(facility)">-->
+<!--                <button style="width: 100px" class="btn btn-primary btn-rounded btn-sm my-0">Delete</button>-->
+<!--              </a>-->
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+
+<div class="mx-auto">
+  <p class="page-link justify-content-center">{{(page + 1) + '/' + totalPage}}</p>
+</div>
+
+
+<!--Pagination-->
+<nav class="d-flex justify-content-end wow fadeIn">
+  <ul class="pagination">
+    <li class="page-item">
+      <button
+        [ngStyle]="{'background-color': first === true ? 'gray' : 'white','color': first === true ? 'white' : 'blue'}"
+        [disabled]="first" class="page-link" (click)="goFirstPage()">Trang Đầu
+      </button>
+    </li>
+    <li class="page-item">
+      <button
+        [ngStyle]="{'background-color': first === true ? 'gray' : 'white','color': first === true ? 'white' : 'blue'}"
+        [disabled]="first" class="page-link" (click)="previous()">Trang Trước
+      </button>
+    </li>
+    <li class="page-item active" aria-current="page">
+      <button [disabled]="true" class="page-link">{{page + 1}}</button>
+    </li>
+    <li class="page-item">
+      <button
+        [ngStyle]="{'background-color': last === true ? 'gray' : 'white','color': last === true ? 'white' : 'blue'}"
+        [disabled]="last" class="page-link" (click)="next()">Trang Sau
+      </button>
+    </li>
+    <li class="page-item">
+      <button
+        [ngStyle]="{'background-color': last === true ? 'gray' : 'white','color': last === true ? 'white' : 'blue'}"
+        [disabled]="last" class="page-link" (click)="goLastPage()">Trang Cuối
+      </button>
+    </li>
+  </ul>
+</nav>
+
+
+<button [hidden]="true" #sucessButton data-toggle="modal" data-target="#successModal"></button>
+<!--success modal-->
+<div id="successModal" class="modal fade">
+  <div class="modal-dialog modal-confirm modal-confirm-success">
+    <div class="modal-content">
+      <div class="modal-header modal-header-success justify-content-center">
+        <div class="icon-box">
+          <i class="material-icons">&#xE876;</i>
+        </div>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+      </div>
+      <div class="modal-body text-center">
+        <h4>Thông báo</h4>
+        <br>
+        <p>Sản phẩm đã được xóa</p>
+        <div class="d-flex justify-content-center">
+          <button type="button" class="btn-modal btn-grad-blue" data-dismiss="modal">Đồng ý</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>

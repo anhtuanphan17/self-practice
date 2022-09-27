@@ -1,0 +1,182 @@
+<!--form tao moi-->
+<form [formGroup]="bookForm" (ngSubmit)="save(errorModalBtn,successButton)">
+  <div class="container-fluid">
+    <div class="row" style="justify-content: center;display: flex">
+      <div class="col-md-10">
+        <div class="card make-color">
+          <div class="card card-body">
+            <h3 class="text-center font-weight-bold text-uppercase py-4">
+              CHỈNH SỬA MỚI SÁCH
+            </h3>
+            <div class="row" style="justify-content: center;display: flex">
+              <div class="col-md-8 row">
+                <input type="hidden" formControlName="id">
+                <div class="form-group col-md-6">
+                  <label for="name">Tên Sách <span class="text-danger">(*):</span></label>
+                  <input formControlName="name" type="text" class="form-control" name="name" id="name">
+                  <!--                  <small class="form-text text-danger" *ngIf="errorProductName!=''">{{errorProductName}}</small>-->
+                  <div
+                    *ngIf="name?.invalid && (name?.dirty || name?.touched|| name?.errors?.['empty'])">
+                    <!--                    <small *ngIf="productForm.controls.name.errors?.maxlength" class="form-text text-danger">Tên phải ít hơn 255 ký tự </small>-->
+                    <small *ngIf="name?.errors?.['maxlength']" class="text-form text-danger">Tên phải ngắn hơn 250 kí
+                      tự</small>
+                    <small
+                      *ngIf="name?.hasError('required') ||name?.errors?.['empty']"
+                      class="form-text text-danger">Vui lòng nhập tên sách.</small>
+                  </div>
+                </div>
+
+                <div class="form-group col-md-6">
+                  <label>Giá (VND) <span class="text-danger">(*):</span></label>
+                  <input class="form-control"
+                         (change)="checkValidatePrice($event)"
+                         type="text"
+                         name="product_price"
+                         [(ngModel)]="product_price" [ngModelOptions]="{standalone: true}"
+                         autocomplete="off"
+                         (keydown)="numberCheck($event)"
+                         (keyup)="CommaFormatted($event)"
+                  >
+                  <div
+                    *ngIf="price?.invalid && (price?.dirty || price?.touched|| price?.errors?.['empty'])">
+                    <small
+                      *ngIf="price?.hasError('required') || price?.errors?.['empty']"
+                      class="form-text text-danger">Vui lòng nhập giá sản phẩm.</small>
+                    <small *ngIf="price?.errors?.['pattern']" class="tex-form text-danger">Giá phải là số và lớn hơn 0. </small>
+                  </div>
+                </div>
+
+
+                <div class="form-group col-md-12">
+                  <div class="file">
+                    <label for="img">Hình Ảnh <span class="text-danger">(*):</span></label>
+                    <input name="img" id="img" type="file" class="file__input" (change)="showPreview($event)">
+                    <img style="width: 180px; height: 200px" src="{{imgVip}}">
+                    <label for="img" class="file__label">
+                      <i class="fa fa-upload"></i>
+                    </label>
+                  </div>
+                  <!--    hien thi loi-->
+                  <div>
+                    <small class="text-danger" *ngIf="alertImage!=''">{{alertImage}}</small>
+                  </div>
+                </div>
+
+
+                <div class="form-group col-md-12">
+                  <label for="category">Danh Mục<span class="text-danger">(*)</span> </label>
+                  <!--                  <input formControlName="cpu" type="text" class="form-control" name="cpu" id="category">-->
+                  <select (change)="validateCategory($event.target)" [compareWith]="comparefn" name="category" id="category" formControlName="categoryDto"
+                          class="form-control">
+                    <option [ngValue]="''"> -- Chọn danh mục sản phẩm --</option>
+                    <option *ngFor="let category of categoryList" [ngValue]="category">{{category.name}}</option>
+                  </select>
+                  <!--    hien thi loi-->
+                  <div
+                    *ngIf="categoryDto?.errors?.['empty']">
+                    <small class="form-text text-danger">Vui lòng chọn danh mục.</small>
+                  </div>
+                </div>
+
+
+                <div class="form-group col-md-12">
+                  <label>Mô tả thêm </label>
+                  <!--                  <ckeditor tagName="textarea"></ckeditor>-->
+                  <textarea formControlName="description"> </textarea>
+
+                </div>
+                <div class=" col-md-12 text-center mx-auto mt-4">
+                  <button style="width: 200px" type="submit" class="btn btn-grad-blue mx-1"><i
+                    class="fa fa-paper-plane"></i>CHỈNH SỬA
+                  </button>
+                  <a data-toggle="modal"
+                     data-target="#cancelModal"
+                     style="width: 200px" type="submit" class="btn btn-grad-red mx-1">
+                    <i class="fa-solid fa-right-from-bracket"></i>HỦY </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+
+<!--<script>-->
+<!--  function format_curency(a) {-->
+<!--    a.value = a.value.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.");-->
+<!--  }-->
+<!--</script>-->
+
+<button [hidden]="true" #successButton data-toggle="modal" data-target="#successModal"></button>
+<!--success modal-->
+<div id="successModal" class="modal fade">
+  <div class="modal-dialog modal-confirm modal-confirm-success">
+    <div class="modal-content">
+      <div class="modal-header modal-header-success justify-content-center">
+        <div class="icon-box">
+          <i class="material-icons">&#xE876;</i>
+        </div>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+      </div>
+      <div class="modal-body text-center">
+        <h4>Thông báo!</h4>
+        <br>
+        <p>Chỉnh sửa sản phẩm thành công</p>
+        <div class="d-flex justify-content-center">
+          <a [routerLink]="['/list']" type="button" class="btn-modal btn-grad-blue" data-dismiss="modal">Đồng ý</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--warning modal-->
+<!--<button [hidden]="true" #deleteModal data-toggle="modal" data-target="#deleteModal"></button>-->
+<div id="cancelModal" class="modal fade">
+  <div class="modal-dialog modal-confirm modal-confirm-danger">
+    <div class="modal-content">
+      <div class="modal-header modal-header-danger justify-content-center">
+        <div class="icon-box">
+          <i class="material-icons">&#xE5CD;</i>
+        </div>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+      </div>
+      <div class="modal-body text-center">
+        <h4>Thông báo</h4>
+        <p>Bạn có muốn hủy chỉnh sửa hàng hóa không ?</p>
+        <!--        <p style="color: red">Lưu ý! Thao tác này không thể hoàn tác</p>-->
+        <div class="d-flex justify-content-center">
+          <a [routerLink]="['']" style="width: 100px;" type="button" class="btn btn-grad-blue mx-3"
+             data-dismiss="modal">Có</a>
+          <button type="button" style="width: 100px;" class="btn btn-grad-red" #cancel data-dismiss="modal">Không
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<button [hidden]="true" #errorModalBtn data-toggle="modal" data-target="#errorModal"></button>
+<!--error modal-->
+<div id="errorModal" class="modal fade">
+  <div class="modal-dialog modal-confirm modal-confirm-danger">
+    <div class="modal-content">
+      <div class="modal-header modal-header-danger justify-content-center">
+        <div class="icon-box">
+          <i class="material-icons">&#xE5CD;</i>
+        </div>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+      </div>
+      <div class="modal-body text-center">
+        <h4>Thông báo</h4>
+        <p>Sản phẩm bạn nhập đã tồn tại!</p>
+        <div class="d-flex justify-content-center">
+          <button #closeErrorModal class="btn-modal btn-grad-red" data-dismiss="modal">Thử lại</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

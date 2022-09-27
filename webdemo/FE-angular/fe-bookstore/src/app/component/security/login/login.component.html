@@ -1,0 +1,108 @@
+<div class="parent clearfix" style="margin-top: 8rem">
+  <div class="ml-5">
+    <div class="login">
+      <div class="container">
+        <div class="login-form">
+          <h1>Đăng nhập </h1>
+          <form [formGroup]="loginForm" (ngSubmit)="login(errorModalBtn,closeErrorModal)">
+            <div class="form-group ">
+              <input type="text" placeholder="Email" class="form-control form-control-lg" id="username"
+                     aria-describedby="emailHelp" formControlName="username" style="width: 487px">
+              <div *ngIf="loginForm?.touched">
+                <p class="text-danger" *ngIf="usernameForm?.errors?.['required']">Vui lòng nhập tên tài khoản.</p>
+                <p class="text-danger" *ngIf="usernameForm?.errors?.['maxlength']">Vui lòng đúng định dạng.</p>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="input-group" *ngIf="!showPassword">
+                <input placeholder="Mật khẩu" type="password" class="form-control form-control-lg password"
+                       id="password"
+                       formControlName="password">
+                <div class="input-group-prepend">
+                  <i (click)="toggleShowPassword()" class="fa-solid fa-eye input-group-text eye-icon"
+                     style="cursor: pointer; pointer-events: all; background-color: white; border: none"
+                  >
+                  </i>
+                </div>
+              </div>
+
+              <div class="input-group" placeholder="Mật khẩu" *ngIf="showPassword">
+
+
+                <input placeholder="Mật khẩu" type="text" class="form-control form-control-lg"
+                       formControlName="password">
+                <div class="input-group-prepend" style="background-color: white">
+                  <i (click)="toggleShowPassword()" class="fa-solid fa-eye-slash input-group-text eye-icon"
+                     style="cursor: pointer; pointer-events: all; background-color: white; border: none">
+                  </i>
+                </div>
+              </div>
+
+              <div *ngIf="password?.touched">
+                <p class="text-danger" *ngIf="password?.errors?.['required']">Vui lòng nhập mật khẩu.</p>
+                <p class="text-danger" *ngIf="password?.errors?.['maxlength']">Vui lòng đúng định dạng.</p>
+              </div>
+            </div>
+            <p class="text-danger">{{errorMessage}}</p>
+
+
+            <div class="remember-form">
+              <input type="checkbox" formControlName="remember_me">
+              <span>lưu đăng nhập </span>
+            </div>
+            <div class="forget-pass">
+              <a [routerLink]="['/singUp']">Đăng ký tài khoản</a>
+              <br>
+              <a [routerLink]="['/forgot-password']">Quên mật khẩu</a>
+            </div>
+
+            <button class="btn" style="background-color:#fd316d; color: white; height: 40px;" type="submit">Đăng Nhập
+            </button>
+            <h5 style="display :flex; justify-content: center; margin-top: 50px">or</h5>
+
+            <div class="social-login" style="margin-top: 50px">
+
+              <a href="#" class="facebook btn d-flex justify-content-center align-items-center">
+                <span class="icon-facebook mr-3"></span><i style="color: white; margin-right: 5px"
+                                                           class="fab fa-lg fa-facebook-square"></i> Đăng nhập với
+                Facebook
+              </a>
+              <a href="#" class="twitter btn d-flex justify-content-center align-items-center">
+                <span class="icon-twitter mr-3"></span> Login with Twitter
+              </a>
+              <a href="#" class="google btn d-flex justify-content-center align-items-center">
+                <span class="icon-google mr-3"></span> Login with Google
+              </a>
+
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<button type="button" class="btn btn-danger" (click)="loginWithGoogle()"> Login with google</button>
+
+<asl-google-signin-button  style="width: 200px" type='standard' text="signin_with" shape="square" size='large'></asl-google-signin-button>
+
+
+<button [hidden]="true" #errorModalBtn data-toggle="modal" data-target="#errorModal"></button>
+
+<!--error modal-->
+<div id="errorModal" class="modal fade">
+  <div class="modal-dialog modal-confirm modal-confirm-danger">
+    <div class="modal-content">
+      <div class="modal-header modal-header-danger justify-content-center">
+        <div class="icon-box">
+          <i class="material-icons">&#xE5CD;</i>
+        </div>
+      </div>
+      <div class="modal-body text-center">
+        <h4>Thông báo</h4>
+        <p>Hệ thống đang bảo trì, vui lòng thử lại sau vài phút nữa.</p>
+        <button #closeErrorModal class="btn-modal btn-grad-red" data-dismiss="modal">THỬ LẠI</button>
+      </div>
+    </div>
+  </div>
+</div>
